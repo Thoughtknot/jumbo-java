@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -22,3 +20,5 @@ jobs:
         java-version: 11
     - name: package
       run: mvn package
+    - name: deploy
+      run: mvn deploy -Dregistry=https://maven.pkg.github.com/Thoughtknot -Dtoken=GH_TOKEN
