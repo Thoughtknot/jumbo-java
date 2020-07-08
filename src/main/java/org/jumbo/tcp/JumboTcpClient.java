@@ -18,7 +18,7 @@ public class JumboTcpClient implements Closeable {
 	}
 
 	public enum Operation {
-		PUT((byte) 11), GET((byte) 21), DEL((byte) 31);
+		PUT((byte) 11), GET((byte) 21), DEL((byte) 31), KEYS((byte) 41);
 
 		private byte val;
 

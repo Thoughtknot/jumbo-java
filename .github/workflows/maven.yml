@@ -21,4 +21,9 @@ jobs:
     - name: package
       run: mvn package
     - name: deploy
-      run: mvn -s m2/settings.xml deploy -Dregistry=https://maven.pkg.github.com/Thoughtknot -Dtoken=${{ secrets.GITHUB_TOKEN }}
+      run: |
+        mkdir -p ~/.m2
+        echo "<settings><servers><server><id>github</id><username>Thoughtknot</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
+        mvn deploy
+      env:
+        GITHUB_TOKEN: ${{ github.token }}

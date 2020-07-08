@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jumbo.codec.Codec;
 import org.jumbo.codec.CodecRegistry;
@@ -37,6 +40,18 @@ public class Jumbo {
 		if (result.length == 0)
 			return null;
 		return val.deserializeValue(result);
+	}
+	
+	public List<Object> getKeysObject(int table, int limit) throws IOException {
+		Codec<Object, Object> val = registry.getCodec(table);
+		if (val == null) {
+			throw new RuntimeException("Could not find a codec registered for table " + table);
+		}
+		List<byte[]> result = getKeys(table, limit);
+		return result
+			.stream()
+			.map(val::deserializeKey)
+			.collect(Collectors.toList());
 	}
 
 	public void deleteObject(int table, Object key) throws IOException {
@@ -80,5 +95,25 @@ public class Jumbo {
 		outputStream.write(BytesUtil.intAsLe(table));
 		outputStream.write(BytesUtil.intAsLe(key.length));
 		outputStream.write(key);
+	}
+
+	public List<byte[]> getKeys(int table, int limit) throws IOException {
+		outputStream.write(Operation.KEYS.getVal());
+		outputStream.write(BytesUtil.intAsLe(table));
+		outputStream.write(BytesUtil.intAsLe(limit));
+
+		byte[] lenBytes = new byte[4];
+		inputStream.read(lenBytes);
+		int len = BytesUtil.getLeInt(lenBytes);
+		List<byte[]> keys = new ArrayList<>(len);
+		for (int i = 0; i < len; i++) {
+			byte[] keyLenBytes = new byte[4];
+			inputStream.read(keyLenBytes);
+			int keyLen = BytesUtil.getLeInt(keyLenBytes);
+			byte[] valueBytes = new byte[keyLen];
+			inputStream.read(valueBytes);
+			keys.add(valueBytes);
+		}
+		return keys;
 	}
 }
