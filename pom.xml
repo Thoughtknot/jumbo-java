@@ -1,25 +1,37 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.jumbo</groupId>
-  <artifactId>jumbo-java</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
-  
-  <properties>
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.source>11</maven.compiler.source>
-  </properties>
-  <distributionManagement>
-   <repository>
-     <id>github</id>
-     <name>GitHub OWNER Apache Maven Packages</name>
-     <url>https://maven.pkg.github.com/Thoughtknot/jumbo-java</url>
-   </repository>
-  </distributionManagement>
-  <dependencies>
-  	<dependency>
-  		<groupId>org.jumbo</groupId>
-  		<artifactId>jumbo-java-common</artifactId>
-  		<version>1.0.0</version>
-  	</dependency>
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.jumbo</groupId>
+	<artifactId>jumbo-java</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<repositories>
+		<repository>
+			<id>jumbo-java-common</id>
+			<url>https://raw.github.com/Thoughtknot/jumbo-java-common/mvn-repo/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<properties>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+	</properties>
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub OWNER Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/Thoughtknot/jumbo-java</url>
+		</repository>
+	</distributionManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.jumbo</groupId>
+			<artifactId>jumbo-java-common</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
 </project>
