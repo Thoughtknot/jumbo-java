@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import org.jumbo.tcp.Jumbo;
+import org.jumbo.tcp.JumboTcp;
 import org.jumbo.tcp.JumboTcpClient;
 import org.jumbo.tcp.JumboTcpClient.Operation;
 
@@ -15,7 +15,7 @@ public class TextClient {
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		System.out.println("Started");
 		JumboTcpClient client = JumboTcpClient.connect(Inet4Address.getLocalHost(), 8080);
-		Jumbo sender = client.blockUntilConnected();
+		JumboTcp sender = client.blockUntilConnected();
 		System.out.println("Usage: PUT/GET/DEL/KEYS <TABLE> <KEY/LIMIT> [<VALUE>]");
 		Scanner scan = new Scanner(System.in);
 		while (true) {

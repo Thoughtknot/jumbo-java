@@ -8,21 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.jumbo.Jumbo;
 import org.jumbo.codec.Codec;
 import org.jumbo.codec.CodecRegistry;
 import org.jumbo.tcp.JumboTcpClient.Operation;
 
-public class Jumbo {
+public class JumboTcp implements Jumbo {
 	private final OutputStream outputStream;
 	private final InputStream inputStream;
 	private final CodecRegistry registry;
 
-	Jumbo(Socket socket) throws IOException {
+	JumboTcp(Socket socket) throws IOException {
 		outputStream = socket.getOutputStream();
 		inputStream = socket.getInputStream();
 		registry = CodecRegistry.get();
 	}
 
+	@Override
 	public void putObject(int table, Object key, Object value) throws IOException {
 		Codec<Object, Object> val = registry.getCodec(table);
 		if (val == null) {
@@ -30,7 +32,8 @@ public class Jumbo {
 		}
 		put(table, val.serializeKey(key), val.serializeValue(value));
 	}
-	
+
+	@Override
 	public Object getObject(int table, Object key) throws IOException {
 		Codec<Object, Object> val = registry.getCodec(table);
 		if (val == null) {
@@ -41,7 +44,8 @@ public class Jumbo {
 			return null;
 		return val.deserializeValue(result);
 	}
-	
+
+	@Override
 	public List<Object> getKeysObject(int table, int limit) throws IOException {
 		Codec<Object, Object> val = registry.getCodec(table);
 		if (val == null) {
@@ -54,6 +58,7 @@ public class Jumbo {
 			.collect(Collectors.toList());
 	}
 
+	@Override
 	public void deleteObject(int table, Object key) throws IOException {
 		Codec<Object, Object> val = registry.getCodec(table);
 		if (val == null) {
@@ -61,7 +66,8 @@ public class Jumbo {
 		}
 		delete(table, val.serializeKey(key));
 	}
-	
+
+	@Override
 	public void put(int table, byte[] key, byte[] value) throws IOException {
 		outputStream.write(Operation.PUT.getVal());
 		outputStream.write(BytesUtil.intAsLe(table));
@@ -70,7 +76,8 @@ public class Jumbo {
 		outputStream.write(BytesUtil.intAsLe(value.length));
 		outputStream.write(value);
 	}
-	
+
+	@Override
 	public byte[] get(int table, byte[] key) throws IOException {
 		outputStream.write(Operation.GET.getVal());
 		outputStream.write(BytesUtil.intAsLe(table));
@@ -89,7 +96,8 @@ public class Jumbo {
 			return valueBytes;
 		}
 	}
-	
+
+	@Override
 	public void delete(int table, byte[] key) throws IOException {
 		outputStream.write(Operation.DEL.getVal());
 		outputStream.write(BytesUtil.intAsLe(table));
@@ -97,6 +105,7 @@ public class Jumbo {
 		outputStream.write(key);
 	}
 
+	@Override
 	public List<byte[]> getKeys(int table, int limit) throws IOException {
 		outputStream.write(Operation.KEYS.getVal());
 		outputStream.write(BytesUtil.intAsLe(table));

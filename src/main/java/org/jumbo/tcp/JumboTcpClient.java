@@ -31,7 +31,7 @@ public class JumboTcpClient implements Closeable {
 		}
 	}
 
-	public Jumbo blockUntilConnected() throws IOException {
+	public JumboTcp blockUntilConnected() throws IOException {
 		while (socket.get() == null) {
 			try {
 				Thread.sleep(100);
@@ -40,12 +40,12 @@ public class JumboTcpClient implements Closeable {
 				// Do nothing.
 			}
 		}
-		return new Jumbo(socket.get());
+		return new JumboTcp(socket.get());
 	}
 	
-	public Optional<Jumbo> ifConnected() throws IOException {
+	public Optional<JumboTcp> ifConnected() throws IOException {
 		if (socket.get() != null) {
-			return Optional.of(new Jumbo(socket.get()));
+			return Optional.of(new JumboTcp(socket.get()));
 		}
 		else {
 			return Optional.empty();

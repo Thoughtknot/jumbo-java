@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.jumbo.tcp.BytesUtil;
-import org.jumbo.tcp.Jumbo;
+import org.jumbo.tcp.JumboTcp;
 import org.jumbo.tcp.JumboTcpClient;
 
 public class TradingApplication {
@@ -30,15 +30,15 @@ public class TradingApplication {
 	private static final int USER_TABLE = 101;
 	private static final int ORDER_TABLE = 102;
 	private static final int TRADE_TABLE = 103;
-	private Jumbo jumbo;
+	private JumboTcp jumbo;
 	private List<User> users;
 	
-	public TradingApplication(Jumbo jumbo) {
+	public TradingApplication(JumboTcp jumbo) {
 		this.jumbo = jumbo;
 	}
 
 	public static void main(String[] args) throws IOException {
-		Jumbo jumbo = JumboTcpClient.connect(Inet4Address.getLocalHost(), 8080)
+		JumboTcp jumbo = JumboTcpClient.connect(Inet4Address.getLocalHost(), 8080)
 			.blockUntilConnected();
 		TradingApplication ta = new TradingApplication(jumbo);
 		Scanner s = new Scanner(System.in);
