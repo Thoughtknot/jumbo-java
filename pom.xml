@@ -5,19 +5,6 @@
 	<groupId>org.jumbo</groupId>
 	<artifactId>jumbo-java</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
-	<repositories>
-		<repository>
-			<id>jumbo-java-common</id>
-			<url>https://github.com/Thoughtknot/jumbo-java-common/</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-	</repositories>
 
 	<properties>
 		<maven.compiler.target>11</maven.compiler.target>
