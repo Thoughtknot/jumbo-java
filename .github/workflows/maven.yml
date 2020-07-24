@@ -21,6 +21,7 @@ jobs:
     - name: setup
       run: |
         cat ~/.m2/settings.xml
+        cp _settings.xml ~/.m2/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - name: package
