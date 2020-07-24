@@ -6,9 +6,15 @@
 	<artifactId>jumbo-java</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<repositories>
+        <repository>
+          <id>central</id>
+          <url>https://repo1.maven.org/maven2</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
 		<repository>
 			<id>jumbo-java-common</id>
-			<url>https://github.com/Thoughtknot/jumbo-java-common/packages/</url>
+			<url>https://github.com/Thoughtknot/jumbo-java-common/</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
