@@ -21,19 +21,8 @@ jobs:
     - name: setup
       run: |
         cp _settings.xml ~/.m2/settings.xml
-        cat ~/.m2/settings.xml
-      env:
-        GITHUB_ACTOR: Thoughtknot
-        GITHUB_TOKEN: ${{ github.token }}
-    - name: package
-      run: |
-        cat ~/.m2/settings.xml
         mvn package
-      env:
-        GITHUB_ACTOR: Thoughtknot
-        GITHUB_TOKEN: ${{ github.token }}
-    - name: deploy
-      run: mvn deploy
+        mvn deploy
       env:
         GITHUB_ACTOR: Thoughtknot
         GITHUB_TOKEN: ${{ github.token }}
