@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>org.jumbo</groupId>
 			<artifactId>jumbo-java-common</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 	</dependencies>
 </project>
