@@ -23,7 +23,7 @@ jobs:
     - name: deploy
       run: |
         mkdir -p ~/.m2
-        echo "<settings><activeProfiles><activeProfile>github</activeProfile></activeProfiles><profiles><profile><id>github</id><repositories><repository><id>central</id><url>https://repo1.maven.org/maven2</url><releases><enabled>true</enabled></releases><snapshots><enabled>true</enabled></snapshots></repository><repository><id>github</id><name>tk</name><url>https://maven.pkg.github.com/Thoughtknot/jumbo-java-common</url></repository></repositories></profile></profiles><servers><server><id>github</id><username>Thoughtknot</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
+        echo "<settings><servers><server><id>github</id><username>Thoughtknot</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
         mvn deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}
