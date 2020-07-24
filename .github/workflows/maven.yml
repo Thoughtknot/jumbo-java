@@ -29,5 +29,11 @@ jobs:
       run: |
         cat ~/.m2/settings.xml
         mvn package
+      env:
+        GITHUB_ACTOR: Thoughtknot
+        GITHUB_TOKEN: ${{ github.token }}
     - name: deploy
       run: mvn deploy
+      env:
+        GITHUB_ACTOR: Thoughtknot
+        GITHUB_TOKEN: ${{ github.token }}
