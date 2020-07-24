@@ -20,11 +20,13 @@ jobs:
         java-version: 11
     - name: setup
       run: |
-        cat ~/.m2/settings.xml
         cp _settings.xml ~/.m2/settings.xml
+        cat ~/.m2/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - name: package
-      run: mvn package
+      run: |
+        cat ~/.m2/settings.xml
+        mvn package
     - name: deploy
       run: mvn deploy
