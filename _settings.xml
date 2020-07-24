@@ -9,6 +9,12 @@
   <profiles>
     <profile>
       <id>github</id>
+    <repository>
+        <id>central</id>
+        <url>https://repo1.maven.org/maven2</url>
+        <releases><enabled>true</enabled></releases>
+        <snapshots><enabled>true</enabled></snapshots>
+    </repository>
       <repositories>
         <repository>
           <id>github</id>

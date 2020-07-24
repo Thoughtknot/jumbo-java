@@ -23,6 +23,7 @@ jobs:
         cp _settings.xml ~/.m2/settings.xml
         cat ~/.m2/settings.xml
       env:
+        GITHUB_ACTOR: Thoughtknot
         GITHUB_TOKEN: ${{ github.token }}
     - name: package
       run: |
